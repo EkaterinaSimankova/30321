@@ -1,0 +1,31 @@
+﻿@page "/products"
+@rendermode InteractiveServer
+@using Simankova.Blazor.Components.ProductComponents
+@using Simankova.Blazor.Services
+@using Simankova.Domain.Entities
+
+<CascadingValue Value="ProductService">
+    <ProductList ProductSelected="ShowDetails" />
+    <Pager />
+</CascadingValue>
+
+<ProductDetails Product="SelectedProduct" />
+
+@code {
+    
+    [Inject] 
+    IProductService<Product> ProductService { get; set; }
+    
+    [Parameter]
+    public Product SelectedProduct { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductService.GetProducts();
+    }
+    
+    void ShowDetails(int id)
+    {
+        SelectedProduct = ProductService.Products.First(d => d.Id == id);
+    }
+}

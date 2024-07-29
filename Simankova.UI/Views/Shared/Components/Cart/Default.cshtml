@@ -1,0 +1,6 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Simankova.Domain.Models.Cart
+<a asp-action="Index" asp-controller="Cart" class="navbar-text ms-auto">
+    @Model.TotalPrice руб <i class="fa-solid fa-cart-shopping"></i>
+    (@Model.Count)
+</a>

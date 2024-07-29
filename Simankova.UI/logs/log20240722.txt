@@ -1,0 +1,17 @@
+2024-07-22 15:57:51.958 +02:00 [INF] -- Request /Identity/Account/Login returns302
+2024-07-22 16:00:54.974 +02:00 [INF] -- Request /Cart/add/1 returns302
+2024-07-22 16:01:04.815 +02:00 [INF] -- Request /Cart/add/1 returns302
+2024-07-22 16:01:07.246 +02:00 [INF] -- Request /Cart/add/2 returns302
+2024-07-22 16:01:08.530 +02:00 [INF] -- Request /Cart/add/2 returns302
+2024-07-22 16:01:09.932 +02:00 [INF] -- Request /Cart/add/3 returns302
+2024-07-22 16:01:17.719 +02:00 [INF] -- Request /Cart/remove/1 returns302
+2024-07-22 16:01:20.673 +02:00 [INF] -- Request /Cart/remove/2 returns302
+2024-07-22 16:01:21.467 +02:00 [INF] -- Request /Cart/remove/3 returns302
+2024-07-22 16:02:43.064 +02:00 [INF] -- Request /Identity/Account/Logout returns302
+2024-07-22 16:02:43.098 +02:00 [INF] -- Request /Identity/Account/Logout returns302
+2024-07-22 16:02:45.889 +02:00 [INF] -- Request /Admin returns302
+2024-07-22 17:12:54.134 +02:00 [INF] -- Request /Identity/Account/Login returns302
+2024-07-22 17:13:01.177 +02:00 [INF] -- Request /Cart/add/2 returns302
+2024-07-22 17:13:02.491 +02:00 [INF] -- Request /Cart/add/3 returns302
+2024-07-22 17:13:04.193 +02:00 [INF] -- Request /Cart/remove/2 returns302
+2024-07-22 17:13:04.637 +02:00 [INF] -- Request /Cart/remove/3 returns302

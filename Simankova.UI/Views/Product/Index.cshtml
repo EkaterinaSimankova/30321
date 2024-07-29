@@ -1,0 +1,91 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Simankova.Domain.Models.ProductListModel<Product>
+
+
+@{
+    ViewData["Title"] = "Index";
+    var request = ViewContext.HttpContext.Request;
+    var returnUrl = request.Path + request.QueryString.ToUriComponent();
+    var categories = ViewData["categories"] as IEnumerable<Category>;
+    var currentCategory = ViewData["currentCategory"] as Category;
+
+}
+
+<h2 class="m-3">Новинки</h2>
+<div class="row">
+    <!-- выбор категории -->
+    <div class="col-2 border-2">
+        <ul class="nav ">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   data-bs-toggle="dropdown"
+                   href="#"
+                   role="button"
+                   aria-expanded="false">
+                    @(currentCategory?.Name ?? "Все")
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item"
+                           asp-controller="product"
+                           asp-route-category=@string.Empty>Все</a>
+                    </li>
+                    @foreach (var item in categories)
+                    {
+                        <li>
+                            <a class="dropdown-item"
+                               asp-controller="product"
+                               asp-route-category="@item.NormalizedName">
+                                @item.Name
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div><!-- выбор категории -->
+    @if (Model != null)
+    {
+        <div class="card-group">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-4 p-4">
+                    <div class="card border-dark m-2">
+                        <img class="card-img-top" src=@($"https://localhost:7002/{item.Image}") alt="No image available" />
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Name</h5>
+                            <p class="card-text">@item.Description</p>
+                            <h5><span class="badge bg-secondary">@item.Price BYN</span></h5>
+                        </div><!-- card-body -->
+                        <div class="card-footer text-center">
+                            <a class="btn btn-outline-primary" asp-action="add" asp-controller="cart"
+                               asp-route-id="@item.Id"
+                               asp-route-returnurl="@returnUrl">
+                                Add to cart <i class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                        </div><!-- card-footer -->
+                    </div><!-- card -->
+                </div>
+                <!-- col -->
+            }
+        </div>
+    }
+    <h2 class="text-warning">@ViewData["Error"]</h2>
+</div>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @{
+            for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(Model.CurrentPage == i ? "active" : string.Empty)">
+                    <a class="page-link"
+                       asp-controller="product"
+                       asp-route-category="@(currentCategory?.NormalizedName ?? string.Empty)"
+                       asp-route-pageNo="@i">@i</a>
+                </li>
+            }
+        }
+
+    </ul>
+</nav>

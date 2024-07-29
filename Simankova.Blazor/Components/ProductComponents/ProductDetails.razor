@@ -1,0 +1,19 @@
+﻿@using Simankova.Domain.Entities
+
+@if (Product != null)
+{
+    <div class="card mt-5" style="width: 18rem;">
+        <img src=@($"https://localhost:7002/{Product.Image}") class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@Product.Name</h5>
+            <p class="card-text">@Product.Description</p>
+            <h4 class="badge bg-info">@Product.Price руб</h4>
+        </div>
+    </div>
+}
+@code {
+    [Parameter]
+    public Product Product { get; set; }
+    [Parameter]
+    public EventCallback<Product> ProductChanged { get; set; }
+}

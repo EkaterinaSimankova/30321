@@ -1,0 +1,82 @@
+﻿@page
+@model Simankova.UI.Areas.Admin.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+<p>
+    <a asp-page="Create" class="btn btn-primary">
+        <i class="fa-solid fa-plus"></i> Create New</a>
+</p>
+<table class="table">
+<thead>
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.Products[0].Name)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Products[0].Description)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Products[0].Price)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Products[0].Image)
+    </th>
+    <th>
+        @Html.DisplayNameFor(model => model.Products[0].Category)
+    </th>
+</tr>
+</thead>
+<tbody>
+        @foreach (var item in Model.Products)
+{
+    <tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        <img src=@($"https://localhost:7002/{item.Image}") style="max-width: 300px;"/>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category.Name)
+    </td>
+    <td>
+    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btnsuccess">
+        <i class="fa-solid fa-pen-to-square"></i> Edit
+    </a>
+    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btninfo ms-1 me-1">
+        <i class="fa-solid fa-info"></i> Details
+    </a>
+    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btndanger">
+        <i class="fa-regular fa-trash-can"></i> Delete
+    </a>
+    </td>
+    </tr>
+}
+</tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @{
+            for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(Model.CurrentPage == i ? "active" : string.Empty)">
+                    <a class="page-link"
+                       asp-area="Admin"
+                       asp-page="/Index"
+                       asp-route-pageNo="@i">@i</a>
+                </li>
+            }
+        }
+
+    </ul>
+</nav>
